@@ -24,15 +24,18 @@ dependencyResolutionManagement {
 
 rootProject.name = "Amro"
 
-// ─── Application module ───────────────────────────────────────────────────────
+//  Application module
 include(":app")
 
-// ─── Core modules ─────────────────────────────────────────────────────────────
+// Core modules
 include(":core:common")
+include(":core:model")
+include(":core:domain")
+include(":core:data")
 include(":core:network")
 include(":core:database")
-include(":core:ui")
+include(":core:designsystem")
 
-// ─── Feature modules ──────────────────────────────────────────────────────────
+// Feature modules
 include(":feature:trending")
 include(":feature:detail")

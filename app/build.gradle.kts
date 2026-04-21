@@ -61,9 +61,12 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
 
-    // ─── Feature modules (wired in as they are implemented) ──────────────────
-    // implementation(project(":feature:trending"))
-    // implementation(project(":feature:detail"))
+    // ─── Design System ───────────────────────────────────────────────────────
+    implementation(project(":core:designsystem"))
+
+    // ─── Feature modules ───────────────────────────────────────────────────────
+    implementation(project(":feature:trending"))
+    implementation(project(":feature:detail"))
 
     // ─── Testing ─────────────────────────────────────────────────────────────
     testImplementation(libs.junit)

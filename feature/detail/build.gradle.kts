@@ -26,9 +26,9 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:network"))
-    implementation(project(":core:database"))
+    implementation(project(":core:model"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:domain"))
 
     // ─── Compose ─────────────────────────────────────────────────────────────
     implementation(platform(libs.androidx.compose.bom))

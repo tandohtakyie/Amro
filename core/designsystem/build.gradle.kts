@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "aim.high.amro.core.ui"
+    namespace = "aim.high.amro.core.designsystem"
     compileSdk = 36
 
     defaultConfig {
