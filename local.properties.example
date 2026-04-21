@@ -1,0 +1,5 @@
+# This file contains default values for secrets.
+# It can be safely checked into version control.
+
+API_KEY_TMDB=your_api_key_here
+API_READ_ACCESS_TOKEN_TMDB=your_access_token_here

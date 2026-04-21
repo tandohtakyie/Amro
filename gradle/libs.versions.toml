@@ -3,6 +3,7 @@
 agp                      = "9.0.1"
 kotlin                   = "2.3.20"
 ksp                      = "2.3.6"
+secretsPlugin            = "2.0.1"
 
 #   AndroidX core
 coreKtx                  = "1.18.0"
@@ -133,6 +134,7 @@ hilt                 = { id = "com.google.dagger.hilt.android",            versi
 ksp                  = { id = "com.google.devtools.ksp",                   version.ref = "ksp" }
 room                 = { id = "androidx.room",                             version.ref = "room" }
 roborazzi            = { id = "io.github.takahirom.roborazzi",             version.ref = "roborazzi" }
+android-secrets      = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsPlugin" }
 
 #   Convention plugins — activated in a future phase via includeBuild
 # amro-android-application = { id = "amro.android.application", version = "unspecified" }
