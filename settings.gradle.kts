@@ -1,3 +1,6 @@
+// build-logic is listed here when convention plugins are activated (future phase):
+// includeBuild("build-logic")
+
 pluginManagement {
     repositories {
         google {
@@ -20,5 +23,16 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Amro"
+
+// ─── Application module ───────────────────────────────────────────────────────
 include(":app")
- 
+
+// ─── Core modules ─────────────────────────────────────────────────────────────
+include(":core:common")
+include(":core:network")
+include(":core:database")
+include(":core:ui")
+
+// ─── Feature modules ──────────────────────────────────────────────────────────
+include(":feature:trending")
+include(":feature:detail")
