@@ -1,0 +1,270 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6b78fdcf7388c07088538251774c42b9",
+    "entities": [
+      {
+        "tableName": "amro_genres",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`genre_last_sync` INTEGER NOT NULL, `genre_label` TEXT NOT NULL, `uid` INTEGER NOT NULL, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "genre_last_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "genre_label",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "uid"
+          ]
+        }
+      },
+      {
+        "tableName": "amro_movie_details",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`detail_last_sync` INTEGER NOT NULL, `full_title` TEXT NOT NULL, `movie_tagline` TEXT NOT NULL, `production_status` TEXT NOT NULL, `length_minutes` INTEGER, `estimated_budget` INTEGER NOT NULL, `actual_revenue` INTEGER NOT NULL, `rating_avg` REAL NOT NULL, `popularity_rank` REAL NOT NULL, `release_day` TEXT NOT NULL, `genres_data_json` TEXT NOT NULL, `plot_description` TEXT NOT NULL, `poster_url_path` TEXT, `backdrop_url_path` TEXT, `total_vote_count` INTEGER NOT NULL, `imdb_reference_id` TEXT, `web_homepage_url` TEXT, `content_for_adults` INTEGER NOT NULL, `origin_language_iso` TEXT NOT NULL, `origin_title_raw` TEXT NOT NULL, `detailed_uid` INTEGER NOT NULL, PRIMARY KEY(`detailed_uid`))",
+        "fields": [
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "detail_last_sync",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "full_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tagline",
+            "columnName": "movie_tagline",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "production_status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "runtime",
+            "columnName": "length_minutes",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "budget",
+            "columnName": "estimated_budget",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "revenue",
+            "columnName": "actual_revenue",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voteAverage",
+            "columnName": "rating_avg",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "popularity",
+            "columnName": "popularity_rank",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "releaseDate",
+            "columnName": "release_day",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "genres",
+            "columnName": "genres_data_json",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "overview",
+            "columnName": "plot_description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posterPath",
+            "columnName": "poster_url_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "backdropPath",
+            "columnName": "backdrop_url_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "voteCount",
+            "columnName": "total_vote_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imdbId",
+            "columnName": "imdb_reference_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "homepage",
+            "columnName": "web_homepage_url",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "adult",
+            "columnName": "content_for_adults",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalLanguage",
+            "columnName": "origin_language_iso",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalTitle",
+            "columnName": "origin_title_raw",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "detailed_uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "detailed_uid"
+          ]
+        }
+      },
+      {
+        "tableName": "amro_movies",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`record_timestamp` INTEGER NOT NULL, `display_title` TEXT NOT NULL, `popularity_score` REAL NOT NULL, `average_rating` REAL NOT NULL, `release_identifier` TEXT NOT NULL, `plot_summary` TEXT NOT NULL, `genres_ids_csv` TEXT NOT NULL, `poster_image_path` TEXT, `backdrop_image_path` TEXT, `rating_count` INTEGER NOT NULL, `is_adult_content` INTEGER NOT NULL, `language_code` TEXT NOT NULL, `original_name` TEXT NOT NULL, `movie_uid` INTEGER NOT NULL, PRIMARY KEY(`movie_uid`))",
+        "fields": [
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "record_timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "display_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "popularity",
+            "columnName": "popularity_score",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voteAverage",
+            "columnName": "average_rating",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "releaseDate",
+            "columnName": "release_identifier",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "overview",
+            "columnName": "plot_summary",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "genreIds",
+            "columnName": "genres_ids_csv",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posterPath",
+            "columnName": "poster_image_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "backdropPath",
+            "columnName": "backdrop_image_path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "voteCount",
+            "columnName": "rating_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "adult",
+            "columnName": "is_adult_content",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalLanguage",
+            "columnName": "language_code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "originalTitle",
+            "columnName": "original_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "movie_uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "movie_uid"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6b78fdcf7388c07088538251774c42b9')"
+    ]
+  }
+}
