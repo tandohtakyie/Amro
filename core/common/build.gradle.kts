@@ -1,16 +1,27 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.lib)
 }
 
 android {
     namespace = "aim.high.amro.core.common"
-    compileSdk = 36
+    compileSdk = libs.versions.android.compile.sdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
-        consumerProguardFiles(rootProject.file("consumer-rules.pro"))
+        minSdk = libs.versions.android.min.sdk.get().toInt()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -18,10 +29,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.kotlinx.coroutines.android)
-
-    testImplementation(libs.junit)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockk)
-    testImplementation(libs.turbine)
+    implementation(libs.androidx.core.ktx)
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.androidx.junit)
+    androidTestImplementation(libs.test.espresso.core)
 }

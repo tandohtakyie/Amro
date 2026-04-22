@@ -1,17 +1,17 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.android.lib)
+    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.db.room)
+    alias(libs.plugins.di.hilt)
 }
 
 android {
     namespace = "aim.high.amro.core.database"
-    compileSdk = 36
+    compileSdk = libs.versions.android.compile.sdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
-        consumerProguardFiles(rootProject.file("consumer-rules.pro"))
+        minSdk = libs.versions.android.min.sdk.get().toInt()
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     compileOptions {
@@ -20,26 +20,25 @@ android {
     }
 }
 
-// Tells the Room Gradle Plugin where to export schema JSON files.
-// These files are committed to source control for migration tracking.
 room {
     schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
-    implementation(project(":core:common"))
+    implementation(projects.core.common)
+    implementation(projects.core.model)
 
-    // ─── Room ────────────────────────────────────────────────────────────────
+    // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
 
-    // ─── DI ──────────────────────────────────────────────────────────────────
+    // DI
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    testImplementation(libs.junit)
+    testImplementation(libs.test.junit)
     testImplementation(libs.room.testing)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.coroutines)
 }

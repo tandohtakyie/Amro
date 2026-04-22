@@ -1,17 +1,17 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.lib)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.di.hilt)
+    alias(libs.plugins.google.ksp)
 }
 
 android {
     namespace = "aim.high.amro.core.network"
-    compileSdk = 36
+    compileSdk = libs.versions.android.compile.sdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
-        consumerProguardFiles(rootProject.file("consumer-rules.pro"))
+        minSdk = libs.versions.android.min.sdk.get().toInt()
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     compileOptions {
@@ -21,20 +21,17 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
+    implementation(projects.core.common)
+    implementation(projects.core.model)
 
-    // ─── HTTP client ──────────────────────────────────────────────────────────
-    implementation(libs.retrofit)
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit.kotlinx.serialization)
+    // Networking Bundle
+    implementation(libs.bundles.bundle.network)
 
-    // ─── DI ──────────────────────────────────────────────────────────────────
+    // DI
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.test.junit)
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.coroutines)
 }

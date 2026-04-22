@@ -1,6 +1,7 @@
 // build-logic is listed here when convention plugins are activated (future phase):
 // includeBuild("build-logic")
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
         google {
@@ -12,6 +13,16 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "com.google.dagger.hilt.android") {
+                useModule("com.google.dagger:hilt-android-gradle-plugin:${requested.version}")
+            }
+            if (requested.id.id == "com.google.android.libraries.mapsplatform.secrets-gradle-plugin") {
+                useModule("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:${requested.version}")
+            }
+        }
     }
 }
 dependencyResolutionManagement {
