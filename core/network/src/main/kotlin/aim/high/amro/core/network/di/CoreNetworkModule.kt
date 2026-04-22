@@ -55,6 +55,6 @@ object CoreNetworkModule {
 
     @Provides
     @Singleton
-    fun provideAmroApiService(retrofit: Retrofit): AmroApiService = 
+    fun provideAmroApiService(retrofit: Retrofit): AmroApiService =
         retrofit.create(AmroApiService::class.java)
 }

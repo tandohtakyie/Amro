@@ -3,7 +3,6 @@ package aim.high.amro.core.data.mapper
 import aim.high.amro.core.database.entity.PersistedDetailedMovie
 import aim.high.amro.core.model.MovieFullDetails
 import aim.high.amro.core.network.model.MovieDetailedResponseDto
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 fun PersistedDetailedMovie.asDomain(): MovieFullDetails = MovieFullDetails(
