@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.lib)
+    alias(libs.plugins.di.hilt)
+    alias(libs.plugins.google.ksp)
 }
 
 android {
@@ -8,20 +10,9 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.android.min.sdk.get().toInt()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -31,8 +22,11 @@ android {
 dependencies {
     implementation(projects.core.model)
     implementation(projects.core.data)
-    implementation(libs.androidx.core.ktx)
-    testImplementation(libs.test.junit)
-    androidTestImplementation(libs.test.androidx.junit)
-    androidTestImplementation(libs.test.espresso.core)
+
+    // Store5 (Required for Use Case return types)
+    implementation(libs.caching.store5)
+
+    // DI
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 }
