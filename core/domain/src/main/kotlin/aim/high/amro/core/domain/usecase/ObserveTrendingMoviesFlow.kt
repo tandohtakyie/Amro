@@ -7,9 +7,9 @@ import org.mobilenativefoundation.store.store5.StoreReadResponse
 import javax.inject.Inject
 
 class ObserveTrendingMoviesFlow @Inject constructor(
-    private val movieDataBroker: MovieRepository
+    private val movieRepository: MovieRepository
 ) {
     operator fun invoke(refresh: Boolean): Flow<StoreReadResponse<List<MovieThumbnail>>> {
-        return movieDataBroker.observeTrendingMovies(refresh = refresh)
+        return movieRepository.observeTrendingMovies(refresh = refresh)
     }
 }

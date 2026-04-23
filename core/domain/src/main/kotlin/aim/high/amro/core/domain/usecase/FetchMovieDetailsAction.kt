@@ -4,7 +4,7 @@ import aim.high.amro.core.data.repository.MovieRepository
 import javax.inject.Inject
 
 class FetchMovieDetailsAction @Inject constructor(
-    private val movieBroker: MovieRepository
+    private val movieRepository: MovieRepository
 ) {
-    suspend operator fun invoke(id: Int) = movieBroker.refreshMovieDetails(id)
+    suspend operator fun invoke(id: Int) = movieRepository.refreshMovieDetails(id)
 }
