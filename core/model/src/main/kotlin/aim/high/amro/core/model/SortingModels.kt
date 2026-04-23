@@ -5,7 +5,9 @@ enum class SortingCriteria(val label: String) {
 
     TITLE("Title"),
 
-    RELEASE_DATE("Release Date")
+    RELEASE_DATE("Release Date"),
+
+    VOTE_AVERAGE("Rating")
 }
 
 enum class SortingDirection {

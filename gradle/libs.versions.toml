@@ -24,6 +24,7 @@ bom-compose = "2026.03.01"
 
 # Navigation
 nav3 = "1.1.0"
+androidx-navigation = "2.8.5"
 
 # Dependency injection
 di-hilt = "2.59.2"
@@ -94,6 +95,7 @@ androidx-compose-material-icons = { group = "androidx.compose.material", name = 
 # Navigation 3
 nav3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "nav3" }
 nav3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "nav3" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
 
 # Dependency injection
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "di-hilt" }

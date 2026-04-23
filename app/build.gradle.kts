@@ -1,25 +1,14 @@
 plugins {
     alias(libs.plugins.android.app)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.google.ksp)
     alias(libs.plugins.di.hilt)
-    alias(libs.plugins.google.secrets)
+    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "aim.high.amro"
     compileSdk = libs.versions.android.compile.sdk.get().toInt()
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    buildFeatures {
-        buildConfig = true
-        compose = true
-    }
 
     defaultConfig {
         applicationId = "aim.high.amro"
@@ -40,21 +29,21 @@ android {
             )
         }
     }
-}
-
-secrets {
-    propertiesFileName = "local.properties"
-    defaultPropertiesFileName = "local.properties.example"
-    ignoreList.add("sdk.*")
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
-    // Feature modules
+    implementation(projects.core.common)
+    implementation(projects.core.model)
+    implementation(projects.core.designsystem)
     implementation(projects.feature.trending)
     implementation(projects.feature.detail)
-
-    // Core modules
-    implementation(projects.core.designsystem)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -65,10 +54,16 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
 
-    // Hilt DI
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.json.serialization)
+
+    // Image loading
+    implementation(libs.bundles.bundle.image.loader)
+
+    // DI
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
-    implementation(libs.hilt.navigation.compose)
 
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.androidx.junit)

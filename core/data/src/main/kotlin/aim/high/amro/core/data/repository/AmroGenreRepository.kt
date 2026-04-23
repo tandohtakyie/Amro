@@ -1,9 +1,8 @@
 package aim.high.amro.core.data.repository
 
 import aim.high.amro.core.common.coroutines.DispatcherProvider
-import aim.high.amro.core.data.mapper.asGenres
 import aim.high.amro.core.data.mapper.asEntities
-import aim.high.amro.core.data.mapper.asGenre
+import aim.high.amro.core.data.mapper.asGenres
 import aim.high.amro.core.database.dao.LocalGenreStore
 import aim.high.amro.core.model.MovieGenre
 import aim.high.amro.core.network.AmroApiService
@@ -30,7 +29,7 @@ class AmroGenreRepository @Inject constructor(
 
     private val genreDataStore: Store<Unit, List<MovieGenre>> = StoreBuilder
         .from(
-            fetcher = Fetcher.of<Unit, List<GenreResponseDto>> {
+            fetcher = Fetcher.of {
                 withContext(dispatchers.io) {
                     api.getGenres().genres
                 }
@@ -63,5 +62,5 @@ class AmroGenreRepository @Inject constructor(
     }
 
     override fun observeGenres(): Flow<StoreReadResponse<List<MovieGenre>>> =
-        genreDataStore.stream(StoreReadRequest.cached(Unit, refresh = false))
+        genreDataStore.stream(StoreReadRequest.cached(Unit, refresh = true))
 }
