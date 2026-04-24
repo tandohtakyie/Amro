@@ -168,6 +168,7 @@ internal fun DetailedViewContent(
                                 Text(
                                     text = "${
                                         String.format(
+                                            java.util.Locale.getDefault(),
                                             "%.1f",
                                             movie.voteAverage
                                         )

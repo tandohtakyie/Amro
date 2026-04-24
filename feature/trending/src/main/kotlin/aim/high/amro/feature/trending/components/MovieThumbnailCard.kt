@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import java.util.Locale
 
 @Composable
 fun MovieThumbnailCard(
@@ -59,7 +60,7 @@ fun MovieThumbnailCard(
                     .clip(RoundedCornerShape(16.dp))
             ) {
                 AsyncImage(
-                    model = "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+                    model = movie.posterUrl,
                     contentDescription = movie.title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -97,7 +98,7 @@ fun MovieThumbnailCard(
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
-                            text = String.format("%.1f", movie.voteAverage),
+                            text = String.format(Locale.getDefault(), "%.1f", movie.voteAverage),
                             color = Color.White,
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold

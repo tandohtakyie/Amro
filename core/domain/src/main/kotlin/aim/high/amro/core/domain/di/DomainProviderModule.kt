@@ -3,7 +3,6 @@ package aim.high.amro.core.domain.di
 import aim.high.amro.core.data.repository.GenreRepository
 import aim.high.amro.core.data.repository.MovieRepository
 import aim.high.amro.core.domain.usecase.ApplyMovieFilteringLogic
-import aim.high.amro.core.domain.usecase.FetchMovieDetailsAction
 import aim.high.amro.core.domain.usecase.SyncTrendingMoviesAction
 import aim.high.amro.core.domain.usecase.TrendingFeedFlow
 import aim.high.amro.core.domain.usecase.WatchMovieDetailsFlow
@@ -35,12 +34,6 @@ object DomainProviderModule {
     fun provideSyncTrendingMoviesAction(
         movieRepo: MovieRepository
     ): SyncTrendingMoviesAction = SyncTrendingMoviesAction(movieRepo)
-
-    @Provides
-    @Singleton
-    fun provideFetchMovieDetailsAction(
-        movieRepo: MovieRepository
-    ): FetchMovieDetailsAction = FetchMovieDetailsAction(movieRepo)
 
     @Provides
     @Singleton

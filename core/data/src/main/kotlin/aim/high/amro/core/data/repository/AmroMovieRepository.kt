@@ -94,11 +94,6 @@ class AmroMovieRepository @Inject constructor(
     override fun observeTrendingMovies(refresh: Boolean): Flow<StoreReadResponse<List<MovieThumbnail>>> =
         trendingGridStore.stream(StoreReadRequest.cached(Unit, refresh = refresh))
 
-    override suspend fun getTrendingMovies(): List<MovieThumbnail> =
-        withContext(dispatchers.databaseRead) {
-            movieRegistry.fetchMovies().asThumbnails()
-        }
-
     override suspend fun refreshTrendingMovies() {
         val req = StoreReadRequest.fresh(Unit)
         trendingGridStore.stream(req)

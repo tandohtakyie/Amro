@@ -11,8 +11,6 @@ interface MovieRepository {
 
     fun observeTrendingMovies(refresh: Boolean): Flow<StoreReadResponse<List<MovieThumbnail>>>
 
-    suspend fun getTrendingMovies(): List<MovieThumbnail>
-
     suspend fun refreshTrendingMovies()
 
     fun observeMovieDetails(movieId: Int): Flow<StoreReadResponse<MovieFullDetails>>
