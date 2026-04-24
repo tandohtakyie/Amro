@@ -31,8 +31,12 @@ class TrendingFeedFlow @Inject constructor(
             val genreData = genres.content
 
             when {
-                // We have data for both — show it regardless of background sync state
-                movieData != null && genreData != null -> {
+                (movies.issue != null && (movieData == null || movieData.isEmpty())) ||
+                        (genres.issue != null && (genreData == null || genreData.isEmpty())) -> {
+                    LoadState.Error(movies.issue ?: genres.issue!!)
+                }
+
+                movieData != null && movieData.isNotEmpty() && genreData != null -> {
                     LoadState.Success(
                         TrendingFeedSnapshot(
                             results = movieData,
@@ -40,11 +44,6 @@ class TrendingFeedFlow @Inject constructor(
                             syncError = movies.issue ?: genres.issue
                         )
                     )
-                }
-                // Hard error with no cached data to fall back on
-                (movies.issue != null && movieData == null) ||
-                        (genres.issue != null && genreData == null) -> {
-                    LoadState.Error(movies.issue ?: genres.issue!!)
                 }
                 // Still waiting for first data
                 else -> LoadState.Loading
@@ -61,15 +60,13 @@ class TrendingFeedFlow @Inject constructor(
 private fun <T> Flow<StoreReadResponse<T>>.streamAsSnapshot(): Flow<DataAccumulator<T>> {
     return this
         .filterNot { it is StoreReadResponse.NoNewData }
-        .scan(DataAccumulator<T>()) { acc, response ->
+        .scan(DataAccumulator<T>()) { dataAccumulator, response ->
             when (response) {
                 is StoreReadResponse.Loading -> {
-                    // Keep existing content, just mark as syncing
-                    acc.copy(isSyncing = true, issue = null)
+                    dataAccumulator.copy(isSyncing = true, issue = null)
                 }
 
                 is StoreReadResponse.Data -> {
-                    // New data — update content, clear error, mark not syncing
                     DataAccumulator(
                         content = response.value,
                         issue = null,
@@ -78,16 +75,15 @@ private fun <T> Flow<StoreReadResponse<T>>.streamAsSnapshot(): Flow<DataAccumula
                 }
 
                 is StoreReadResponse.Error.Exception -> {
-                    // Error — keep last known content, record the error
-                    acc.copy(isSyncing = false, issue = response.error)
+                    dataAccumulator.copy(isSyncing = false, issue = response.error)
                 }
 
                 is StoreReadResponse.Error.Message -> {
-                    acc.copy(isSyncing = false, issue = Exception(response.message))
+                    dataAccumulator.copy(isSyncing = false, issue = Exception(response.message))
                 }
 
-                is StoreReadResponse.NoNewData -> acc // filtered out above
-                else -> acc
+                is StoreReadResponse.NoNewData -> dataAccumulator
+                else -> dataAccumulator
             }
         }
         .distinctUntilChanged()

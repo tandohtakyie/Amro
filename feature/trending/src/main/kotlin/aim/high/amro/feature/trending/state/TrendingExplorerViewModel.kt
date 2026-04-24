@@ -51,7 +51,7 @@ class TrendingExplorerViewModel @Inject constructor(
                         }
 
                         is LoadState.Error -> {
-                            if (current is TrendingExplorerUiState.Loaded) {
+                            if (current is TrendingExplorerUiState.Loaded && current.list.isNotEmpty()) {
                                 current.copy(alertMessage = result.cause.asUiErrorMessage())
                             } else {
                                 TrendingExplorerUiState.Failure(
