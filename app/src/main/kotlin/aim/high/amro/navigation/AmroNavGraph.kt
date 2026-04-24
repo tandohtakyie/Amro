@@ -23,13 +23,13 @@ fun AmroNavGraph(
         composable<AmroAppRoutes.TrendingFeed> {
             TrendingScreen(
                 onMovieClick = { id ->
-                    navHostController.navigate(AmroAppRoutes.MovieExplorerDetail(id))
+                    navHostController.navigate(AmroAppRoutes.MovieDetail(id))
                 }
             )
         }
 
-        composable<AmroAppRoutes.MovieExplorerDetail> { entry ->
-            val route: AmroAppRoutes.MovieExplorerDetail = entry.toRoute()
+        composable<AmroAppRoutes.MovieDetail> { entry ->
+            val route: AmroAppRoutes.MovieDetail = entry.toRoute()
             DetailedScreen(
                 movieId = route.id,
                 onBack = { navHostController.navigateUp() }

@@ -48,14 +48,14 @@ internal fun TrendingErrorView(
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Please check your internet connection and try again.",
+            text = stringResource(aim.high.amro.feature.trending.R.string.trending_error_connection_message),
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(modifier = Modifier.height(24.dp))
         Button(onClick = onRetry) {
-            Text(text = "Retry")
+            Text(text = stringResource(aim.high.amro.feature.trending.R.string.trending_retry_button))
         }
     }
 }

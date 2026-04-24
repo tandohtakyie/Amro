@@ -2,6 +2,7 @@ package aim.high.amro.feature.trending.components
 
 import aim.high.amro.core.model.SortingCriteria
 import aim.high.amro.core.model.SortingDirection
+import aim.high.amro.feature.trending.R
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -37,7 +39,7 @@ internal fun SortingBottomSheetContent(
             .padding(bottom = 48.dp, start = 24.dp, end = 24.dp, top = 8.dp)
     ) {
         Text(
-            text = "Sort & Filter",
+            text = stringResource(R.string.sorting_sheet_title),
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold
         )
@@ -45,7 +47,7 @@ internal fun SortingBottomSheetContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Order By",
+            text = stringResource(R.string.sorting_order_by_label),
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.primary
         )
@@ -64,7 +66,8 @@ internal fun SortingBottomSheetContent(
                     onClick = { onCriteriaSelect(criteria) }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = criteria.label)
+                // Using labelRes from core:model
+                Text(text = stringResource(criteria.labelRes))
             }
         }
 
@@ -73,7 +76,7 @@ internal fun SortingBottomSheetContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Direction",
+            text = stringResource(R.string.sorting_direction_label),
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.primary
         )
@@ -88,7 +91,10 @@ internal fun SortingBottomSheetContent(
                         index = index,
                         count = SortingDirection.entries.size
                     ),
-                    label = { Text(direction.name.lowercase().replaceFirstChar { it.uppercase() }) }
+                    label = { 
+                        // Using labelRes from core:model
+                        Text(stringResource(direction.labelRes)) 
+                    }
                 )
             }
         }

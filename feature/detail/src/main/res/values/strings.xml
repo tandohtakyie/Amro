@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail_error_message">We couldn\'t load the details. Please try again later.</string>
+    <string name="detail_vote_count_format">(%s votes)</string>
+    <string name="detail_imdb_button">View on IMDb</string>
+    <string name="detail_overview_title">Overview</string>
+    <string name="detail_budget_label">Budget</string>
+    <string name="detail_revenue_label">Revenue</string>
+    <string name="detail_back_button_cd">Back</string>
+</resources>

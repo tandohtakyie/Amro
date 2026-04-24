@@ -1,6 +1,7 @@
 package aim.high.amro.feature.detail.components
 
-import aim.high.amro.feature.detail.state.DetailsExplorerUiState
+import aim.high.amro.feature.detail.state.DetailsUiState
+import aim.high.amro.feature.detail.R
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -40,6 +41,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -51,7 +53,7 @@ import coil3.compose.AsyncImage
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DetailedViewContent(
-    uiState: DetailsExplorerUiState,
+    uiState: DetailsUiState,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -63,14 +65,14 @@ internal fun DetailedViewContent(
             .background(MaterialTheme.colorScheme.background)
     ) {
         when (uiState) {
-            is DetailsExplorerUiState.Loading -> {
+            is DetailsUiState.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
                     color = MaterialTheme.colorScheme.primary
                 )
             }
 
-            is DetailsExplorerUiState.Failure -> {
+            is DetailsUiState.Failure -> {
                 Column(
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -84,13 +86,13 @@ internal fun DetailedViewContent(
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        "We couldn't load the details. Please try again later.",
+                        text = stringResource(R.string.detail_error_message),
                         textAlign = TextAlign.Center
                     )
                 }
             }
 
-            is DetailsExplorerUiState.Success -> {
+            is DetailsUiState.Success -> {
                 val movie = uiState.info
                 val scrollState = rememberScrollState()
 
@@ -158,7 +160,7 @@ internal fun DetailedViewContent(
                                         "%.1f",
                                         movie.voteAverage
                                     )
-                                } (${movie.voteCount} votes)",
+                                } ${stringResource(R.string.detail_vote_count_format, movie.voteCount)}",
                                 style = MaterialTheme.typography.labelMedium
                             )
                         }
@@ -202,7 +204,7 @@ internal fun DetailedViewContent(
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "View on IMDb",
+                                    text = stringResource(R.string.detail_imdb_button),
                                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)
                                 )
                             }
@@ -210,7 +212,10 @@ internal fun DetailedViewContent(
                         }
 
                         // Overview
-                        Text(text = "Overview", style = MaterialTheme.typography.headlineMedium)
+                        Text(
+                            text = stringResource(R.string.detail_overview_title), 
+                            style = MaterialTheme.typography.headlineMedium
+                        )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(text = movie.overview, style = MaterialTheme.typography.bodyLarge)
 
@@ -222,12 +227,12 @@ internal fun DetailedViewContent(
                             horizontalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
                             StatsCard(
-                                label = "Budget",
+                                label = stringResource(R.string.detail_budget_label),
                                 formattedValue = movie.displayBudget,
                                 modifier = Modifier.weight(1.0f)
                             )
                             StatsCard(
-                                label = "Revenue",
+                                label = stringResource(R.string.detail_revenue_label),
                                 formattedValue = movie.displayRevenue,
                                 modifier = Modifier.weight(1.0f)
                             )
@@ -273,7 +278,7 @@ internal fun DetailedViewContent(
         ) {
             Icon(
                 Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back",
+                contentDescription = stringResource(R.string.detail_back_button_cd),
                 tint = Color.White
             )
         }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="trending_app_title">Amro</string>
+    <string name="trending_sort_filter_cd">Sort &amp; Filter</string>
+    <string name="trending_error_connection_message">Please check your internet connection and try again.</string>
+    <string name="trending_retry_button">Retry</string>
+    <string name="sorting_sheet_title">Sort &amp; Filter</string>
+    <string name="sorting_order_by_label">Order By</string>
+    <string name="sorting_direction_label">Direction</string>
+</resources>

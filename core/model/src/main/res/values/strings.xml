@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sorting_criteria_popularity">Popularity</string>
+    <string name="sorting_criteria_title">Title</string>
+    <string name="sorting_criteria_release_date">Release Date</string>
+    <string name="sorting_criteria_rating">Rating</string>
+    <string name="sorting_direction_ascending">Ascending</string>
+    <string name="sorting_direction_descending">Descending</string>
+</resources>

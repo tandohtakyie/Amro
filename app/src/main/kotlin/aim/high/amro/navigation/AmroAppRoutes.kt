@@ -7,5 +7,5 @@ sealed interface AmroAppRoutes {
     data object TrendingFeed : AmroAppRoutes
 
     @Serializable
-    data class MovieExplorerDetail(val id: Int) : AmroAppRoutes
+    data class MovieDetail(val id: Int) : AmroAppRoutes
 }

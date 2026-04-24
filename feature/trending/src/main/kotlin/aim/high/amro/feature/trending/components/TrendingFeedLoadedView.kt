@@ -2,7 +2,7 @@ package aim.high.amro.feature.trending.components
 
 import aim.high.amro.core.model.MovieGenre
 import aim.high.amro.core.model.MovieThumbnail
-import aim.high.amro.feature.trending.state.TrendingExplorerEvent
+import aim.high.amro.feature.trending.state.TrendingEvent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,7 +23,7 @@ internal fun TrendingFeedLoadedView(
     categories: List<MovieGenre>,
     activeId: Int?,
     isRefreshing: Boolean,
-    onEvent: (TrendingExplorerEvent) -> Unit,
+    onEvent: (TrendingEvent) -> Unit,
     onMovieClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -31,12 +31,12 @@ internal fun TrendingFeedLoadedView(
         CategorySelectionBar(
             categories = categories,
             selectedId = activeId,
-            onGenreFilter = { onEvent(TrendingExplorerEvent.ChangeGenre(it)) }
+            onGenreFilter = { onEvent(TrendingEvent.ChangeGenre(it)) }
         )
 
         PullToRefreshBox(
             isRefreshing = isRefreshing,
-            onRefresh = { onEvent(TrendingExplorerEvent.PullToRefresh) }
+            onRefresh = { onEvent(TrendingEvent.PullToRefresh) }
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(160.dp),

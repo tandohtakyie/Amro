@@ -23,15 +23,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TrendingExplorerViewModel @Inject constructor(
+class TrendingViewModel @Inject constructor(
     private val trendingFeed: TrendingFeedFlow,
     private val filterLogic: ApplyMovieFilteringLogic,
     private val refreshAction: SyncTrendingMoviesAction
 ) : ViewModel() {
 
     private val _viewState =
-        MutableStateFlow<TrendingExplorerUiState>(TrendingExplorerUiState.Loading)
-    val viewState: StateFlow<TrendingExplorerUiState> = _viewState.asStateFlow()
+        MutableStateFlow<TrendingUiState>(TrendingUiState.Loading)
+    val viewState: StateFlow<TrendingUiState> = _viewState.asStateFlow()
 
     private var observationJob: Job? = null
 
@@ -47,14 +47,14 @@ class TrendingExplorerViewModel @Inject constructor(
                 _viewState.update { current ->
                     when (result) {
                         is LoadState.Loading -> {
-                            current as? TrendingExplorerUiState.Loaded ?: TrendingExplorerUiState.Loading
+                            current as? TrendingUiState.Loaded ?: TrendingUiState.Loading
                         }
 
                         is LoadState.Error -> {
-                            if (current is TrendingExplorerUiState.Loaded && current.list.isNotEmpty()) {
+                            if (current is TrendingUiState.Loaded && current.list.isNotEmpty()) {
                                 current.copy(alertMessage = result.cause.asUiErrorMessage())
                             } else {
-                                TrendingExplorerUiState.Failure(
+                                TrendingUiState.Failure(
                                     errorRes = result.cause.asUiErrorMessage(),
                                     isNetworkIssue = result.cause.isConnectionIssue()
                                 )
@@ -64,7 +64,7 @@ class TrendingExplorerViewModel @Inject constructor(
                         is LoadState.Success -> {
                             val data = result.data
 
-                            val (activeG, activeS, activeD) = if (current is TrendingExplorerUiState.Loaded) {
+                            val (activeG, activeS, activeD) = if (current is TrendingUiState.Loaded) {
                                 Triple(current.activeGenre, current.sorting, current.direction)
                             } else {
                                 Triple(
@@ -81,7 +81,7 @@ class TrendingExplorerViewModel @Inject constructor(
                                 direction = activeD
                             )
 
-                            TrendingExplorerUiState.Loaded(
+                            TrendingUiState.Loaded(
                                 list = data.results,
                                 filteredList = filtered,
                                 categories = data.categories,
@@ -97,20 +97,20 @@ class TrendingExplorerViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    fun handleEvent(event: TrendingExplorerEvent) {
+    fun handleEvent(event: TrendingEvent) {
         when (event) {
-            TrendingExplorerEvent.PullToRefresh -> triggerManualSync()
-            is TrendingExplorerEvent.ChangeGenre -> updateGenreFilter(event.genreId)
-            is TrendingExplorerEvent.ChangeSorting -> updateSortingType(event.criteria)
-            is TrendingExplorerEvent.ToggleSortingDirection -> updateSortingDirection(event.direction)
-            TrendingExplorerEvent.RetryLoad -> beginObservation()
-            TrendingExplorerEvent.DismissAlert -> clearAlert()
+            TrendingEvent.PullToRefresh -> triggerManualSync()
+            is TrendingEvent.ChangeGenre -> updateGenreFilter(event.genreId)
+            is TrendingEvent.ChangeSorting -> updateSortingType(event.criteria)
+            is TrendingEvent.ToggleSortingDirection -> updateSortingDirection(event.direction)
+            TrendingEvent.RetryLoad -> beginObservation()
+            TrendingEvent.DismissAlert -> clearAlert()
         }
     }
 
     private fun updateGenreFilter(genreId: Int?) {
         _viewState.update { state ->
-            if (state !is TrendingExplorerUiState.Loaded) return@update state
+            if (state !is TrendingUiState.Loaded) return@update state
             val nextFiltered = filterLogic(
                 movies = state.list,
                 genreIds = if (genreId != null) setOf(genreId) else emptySet(),
@@ -126,7 +126,7 @@ class TrendingExplorerViewModel @Inject constructor(
 
     private fun updateSortingType(criteria: SortingCriteria) {
         _viewState.update { state ->
-            if (state !is TrendingExplorerUiState.Loaded) return@update state
+            if (state !is TrendingUiState.Loaded) return@update state
             val nextFiltered = filterLogic(
                 movies = state.list,
                 genreIds = if (state.activeGenre != null) setOf(state.activeGenre) else emptySet(),
@@ -142,7 +142,7 @@ class TrendingExplorerViewModel @Inject constructor(
 
     private fun updateSortingDirection(direction: SortingDirection) {
         _viewState.update { state ->
-            if (state !is TrendingExplorerUiState.Loaded) return@update state
+            if (state !is TrendingUiState.Loaded) return@update state
             val nextFiltered = filterLogic(
                 movies = state.list,
                 genreIds = if (state.activeGenre != null) setOf(state.activeGenre) else emptySet(),
@@ -158,17 +158,17 @@ class TrendingExplorerViewModel @Inject constructor(
 
     private fun triggerManualSync() = viewModelScope.launch {
         _viewState.update { state ->
-            if (state is TrendingExplorerUiState.Loaded) state.copy(refreshing = true) else state
+            if (state is TrendingUiState.Loaded) state.copy(refreshing = true) else state
         }
         refreshAction()
         _viewState.update { state ->
-            if (state is TrendingExplorerUiState.Loaded) state.copy(refreshing = false) else state
+            if (state is TrendingUiState.Loaded) state.copy(refreshing = false) else state
         }
     }
 
     private fun clearAlert() {
         _viewState.update { state ->
-            if (state is TrendingExplorerUiState.Loaded) state.copy(alertMessage = null) else state
+            if (state is TrendingUiState.Loaded) state.copy(alertMessage = null) else state
         }
     }
 }
