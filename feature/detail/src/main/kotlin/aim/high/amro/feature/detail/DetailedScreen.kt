@@ -23,6 +23,7 @@ fun DetailedScreen(
 
     DetailedViewContent(
         uiState = state,
+        onEvent = viewModel::handleEvent,
         onBack = onBack,
         modifier = modifier
     )

@@ -23,7 +23,8 @@ class WatchMovieDetailsFlow @Inject constructor(
                     LoadState.Success(
                         DetailedMovieSnapshot(
                             data = metaData,
-                            syncIssue = accumulator.syncIssue
+                            syncIssue = accumulator.syncIssue,
+                            isRefreshing = accumulator.isUpdating
                         )
                     )
                 } else if (accumulator.syncIssue != null) {
@@ -39,9 +40,6 @@ private fun Flow<StoreReadResponse<MovieFullDetails>>.streamAsDetailedSnapshot()
     return this.filterNot { it is StoreReadResponse.NoNewData }
         .scan(DetailAccumulator()) { acc, response ->
             val responseContent = response.dataOrNull()
-
-            responseContent != null &&
-                    response.origin == StoreReadResponseOrigin.SourceOfTruth
 
             val metaData = responseContent ?: acc.metaData
             

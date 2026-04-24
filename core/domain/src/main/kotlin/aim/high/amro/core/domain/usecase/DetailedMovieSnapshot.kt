@@ -4,5 +4,6 @@ import aim.high.amro.core.model.MovieFullDetails
 
 data class DetailedMovieSnapshot(
     val data: MovieFullDetails?,
-    val syncIssue: Throwable? = null
+    val syncIssue: Throwable? = null,
+    val isRefreshing: Boolean = false
 )
