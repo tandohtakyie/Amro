@@ -45,7 +45,7 @@ The application is built on a **Modular Clean Architecture** to ensure industria
 ### 2. Configuration
 Add your API key to the `local.properties` file in the project root:
 ```properties
-TMDB_API_KEY=your_api_key_here
+API_KEY_TMDB=your_api_key_here
 ```
 
 ### 3. Execution
