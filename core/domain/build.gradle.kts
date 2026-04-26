@@ -30,4 +30,6 @@ dependencies {
     // DI
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+ 
+    testImplementation(libs.bundles.bundle.testing.unit)
 }
