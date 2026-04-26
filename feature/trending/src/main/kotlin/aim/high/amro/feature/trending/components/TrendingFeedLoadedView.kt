@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -27,6 +28,10 @@ internal fun TrendingFeedLoadedView(
     onMovieClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val genreMap = remember(categories) {
+        categories.associate { it.id to it.name }
+    }
+
     Column(modifier = modifier) {
         CategorySelectionBar(
             categories = categories,
@@ -46,8 +51,13 @@ internal fun TrendingFeedLoadedView(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(list, key = { it.id }) { movie ->
+                    val genreNames = remember(movie.genreIds, genreMap) {
+                        movie.genreIds.mapNotNull { genreMap[it] }
+                    }
+
                     MovieThumbnailCard(
                         movie = movie,
+                        genres = genreNames,
                         onClick = onMovieClick
                     )
                 }

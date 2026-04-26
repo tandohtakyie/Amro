@@ -5,25 +5,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -34,11 +27,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import java.util.Locale
 
 @Composable
 fun MovieThumbnailCard(
     movie: MovieThumbnail,
+    genres: List<String>,
     onClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -77,34 +70,6 @@ fun MovieThumbnailCard(
                             )
                         )
                 )
-
-                // Rating Badge
-                Box(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .background(
-                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(horizontal = 6.dp, vertical = 2.dp)
-                        .align(Alignment.TopEnd)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Default.Star,
-                            contentDescription = null,
-                            tint = Color.White,
-                            modifier = Modifier.size(12.dp)
-                        )
-                        Spacer(modifier = Modifier.width(2.dp))
-                        Text(
-                            text = String.format(Locale.getDefault(), "%.1f", movie.voteAverage),
-                            color = Color.White,
-                            style = MaterialTheme.typography.labelMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
             }
 
             Column(modifier = Modifier.padding(12.dp)) {
@@ -116,13 +81,15 @@ fun MovieThumbnailCard(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
+                
                 Spacer(modifier = Modifier.height(4.dp))
+                
                 Text(
-                    text = movie.releaseDate.split("-").firstOrNull() ?: "",
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontSize = 13.sp,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                    )
+                    text = genres.joinToString(", "),
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
             }
         }
