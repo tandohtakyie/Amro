@@ -18,6 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+/**
+ * A stylized chip used for categorical selection (e.g., Genres).
+ * 
+ * Supports two visual states (active/inactive) with distinct color schemes to indicate selection.
+ *
+ * @param label The text displayed on the chip.
+ * @param isActive Whether the chip currently represents a selected state.
+ * @param onClick Callback triggered when the chip is pressed.
+ * @param modifier Custom modifier for layout adjustments.
+ */
 @Composable
 internal fun GenreChip(
     label: String,

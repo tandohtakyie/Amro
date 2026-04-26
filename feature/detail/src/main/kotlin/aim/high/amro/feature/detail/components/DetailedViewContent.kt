@@ -52,6 +52,20 @@ import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import coil3.compose.AsyncImage
 
+/**
+ * The primary content for the Movie Details screen.
+ * 
+ * This component handles the visual presentation of all three primary UI states:
+ * - [DetailsUiState.Loading]: Full-screen progress indicator.
+ * - [DetailsUiState.Failure]: Error graphic with a localized message and retry action.
+ * - [DetailsUiState.Success]: Comprehensive movie profile including hero backdrop, 
+ *   IMDb integration, financial stats, and localized genre chips.
+ *
+ * @param uiState The current reactive state from the ViewModel.
+ * @param onEvent Callback for handling user interactions (Refresh, Retry).
+ * @param onBack Callback for navigating back to the previous screen.
+ * @param modifier Custom modifier for layout adjustments.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DetailedViewContent(

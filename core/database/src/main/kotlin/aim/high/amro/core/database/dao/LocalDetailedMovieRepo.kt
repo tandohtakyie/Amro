@@ -7,6 +7,12 @@ import androidx.room.Query
 import aim.high.amro.core.database.entity.PersistedDetailedMovie
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Data Access Object for persisting and retrieving granular movie detail profiles.
+ * 
+ * Manages the full metadata for individual movies, allowing for efficient 
+ * offline viewing of previously visited detailed screens.
+ */
 @Dao
 interface LocalDetailedMovieRepo {
 

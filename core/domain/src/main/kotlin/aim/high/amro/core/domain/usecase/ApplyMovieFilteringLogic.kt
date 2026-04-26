@@ -7,6 +7,15 @@ import javax.inject.Inject
 
 class ApplyMovieFilteringLogic @Inject constructor() {
 
+    /**
+     * Applies both filtering (by genre) and sorting to a list of movies.
+     * 
+     * @param movies The source list of movies to be processed.
+     * @param genreIds A set of genre IDs to filter for. If empty, no genre filtering is applied.
+     * @param sortType The criteria used to sort the resulting list (e.g., Popularity, Title).
+     * @param direction The sort direction (Ascending or Descending).
+     * @return A new list containing the movies that match the filter, sorted by the specified criteria.
+     */
     operator fun invoke(
         movies: List<MovieThumbnail>,
         genreIds: Set<Int>,

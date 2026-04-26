@@ -22,6 +22,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel responsible for managing the state of the Trending Feed screen.
+ * 
+ * This ViewModel bridges the gap between the raw movie stream ([trendingFeed]) and the UI-optimized 
+ * filtering logic. It maintains a state machine using [TrendingUiState] to handle loading, 
+ * success, and failure scenarios.
+ */
 @HiltViewModel
 class TrendingViewModel @Inject constructor(
     private val trendingFeed: TrendingFeedFlow,

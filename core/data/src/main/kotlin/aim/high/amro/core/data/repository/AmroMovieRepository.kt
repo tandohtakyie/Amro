@@ -29,6 +29,15 @@ import org.mobilenativefoundation.store.store5.StoreReadRequest
 import org.mobilenativefoundation.store.store5.StoreReadResponse
 import javax.inject.Inject
 
+/**
+ * Repository implementation for movie-related data, leveraging Store5 for reactive caching.
+ * 
+ * This repository manages two distinct data streams:
+ * 1. [trendingGridStore]: A collection of the top 100 trending movies, fetched in bulk (5 pages).
+ * 2. [detailsCacheStore]: A granular store for individual movie details, keyed by [movieId].
+ * 
+ * It effectively abstracts the complexities of network fetching and database persistence (Source of Truth).
+ */
 class AmroMovieRepository @Inject constructor(
     private val api: AmroApiService,
     private val movieRegistry: LocalMovieRegistry,

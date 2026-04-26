@@ -25,6 +25,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
+/**
+ * Content for the sorting and filtering bottom sheet.
+ * 
+ * Provides a localized interface for selecting [SortingCriteria] via radio buttons
+ * and [SortingDirection] via a segmented control.
+ *
+ * @param currentCriteria The currently active sorting criteria.
+ * @param currentDirection The currently active sorting direction.
+ * @param onCriteriaSelect Callback when a new criteria is selected.
+ * @param onDirectionSelect Callback when a new direction is selected.
+ * @param modifier Custom modifier for layout adjustments.
+ */
 @Composable
 internal fun SortingBottomSheetContent(
     currentCriteria: SortingCriteria,

@@ -28,6 +28,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 
+/**
+ * A visually rich card representing a movie thumbnail in the trending feed.
+ * 
+ * Displays the movie's poster image with a gradient overlay for improved text contrast,
+ * alongside its title and localized genre labels.
+ *
+ * @param movie The movie data to display.
+ * @param genres A list of localized genre names.
+ * @param onClick Callback triggered when the card is pressed, providing the movie ID.
+ * @param modifier Custom modifier for layout adjustments.
+ */
 @Composable
 fun MovieThumbnailCard(
     movie: MovieThumbnail,

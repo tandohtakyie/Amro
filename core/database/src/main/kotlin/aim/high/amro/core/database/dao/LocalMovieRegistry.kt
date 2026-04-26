@@ -8,6 +8,12 @@ import androidx.room.Transaction
 import aim.high.amro.core.database.entity.CachedLocalMovie
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Data Access Object for managing the indexed registry of trending movies.
+ * 
+ * Provides methods for atomic replacement of the entire trending list, ensuring 
+ * that the localized cache stay synchronized with the latest network results.
+ */
 @Dao
 interface LocalMovieRegistry {
 

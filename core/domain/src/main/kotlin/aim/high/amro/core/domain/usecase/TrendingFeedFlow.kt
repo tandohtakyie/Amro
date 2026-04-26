@@ -17,6 +17,16 @@ class TrendingFeedFlow @Inject constructor(
     private val genreRepository: GenreRepository,
     private val movieRepository: MovieRepository
 ) {
+    /**
+     * Provides a unified stream of movie data combined with available genres.
+     * 
+     * This function synchronizes two separate data sources (movies and genres) into a single 
+     * [TrendingFeedSnapshot]. It utilizes [DataAccumulator] to ensure that once data is 
+     * successfully retrieved, it persists in the UI even if subsequent background syncs 
+     * encounter temporary network issues.
+     *
+     * @return A [Flow] emitting [LoadState] of [TrendingFeedSnapshot].
+     */
     operator fun invoke(): Flow<LoadState<TrendingFeedSnapshot>> {
         // Use refresh=true so Store5 always fetches from network on cold start
         // while still returning cached data immediately if available
