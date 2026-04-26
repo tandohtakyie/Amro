@@ -34,7 +34,7 @@ The application is built on a **Modular Clean Architecture** to ensure industria
 
 - **Automated Testing**: Robust validation of ViewModels, Domain logic, and state transitions using MockK and Turbine.
 - **Technical Documentation**: High-priority business logic and reactive streams are fully documented via KDocs for future-proof maintainability.
-- **UI Standards**: 100% adherence to Jetpack Compose best practices, including the Modifier "Decoration" pattern and resource-based localization.
+- **UI Standards**: 100% adherence to Jetpack Compose best practices.
 
 ## Environment Setup
 
