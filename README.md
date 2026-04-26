@@ -1,4 +1,4 @@
-# AMRO - Production Grade Movie Explorer
+# Amro
 
 AMRO is a sophisticated Android application designed for exploring global trending movies. It serves as a flagship demonstration of modern Android development, featuring a robust offline-first architecture, premium UI/UX, and high-precision engineering standards.
 
