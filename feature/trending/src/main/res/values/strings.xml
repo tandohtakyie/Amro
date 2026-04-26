@@ -7,4 +7,5 @@
     <string name="sorting_sheet_title">Sort &amp; Filter</string>
     <string name="sorting_order_by_label">Order By</string>
     <string name="sorting_direction_label">Direction</string>
+    <string name="trending_all_category">All</string>
 </resources>

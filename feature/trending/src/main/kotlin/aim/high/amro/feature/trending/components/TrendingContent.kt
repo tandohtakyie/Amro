@@ -21,8 +21,8 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,7 +43,7 @@ internal fun TrendingContent(
     modifier: Modifier = Modifier
 ) {
     var showSortSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -72,7 +72,7 @@ internal fun TrendingContent(
                 actions = {
                     IconButton(onClick = { showSortSheet = true }) {
                         Icon(
-                            Icons.Default.FilterList, 
+                            Icons.Default.FilterList,
                             contentDescription = stringResource(R.string.trending_sort_filter_cd)
                         )
                     }
@@ -108,7 +108,7 @@ internal fun TrendingContent(
                         onEvent = onEvent,
                         onMovieClick = onMovieClick
                     )
-                    
+
                     if (showSortSheet) {
                         ModalBottomSheet(
                             onDismissRequest = { showSortSheet = false },
@@ -117,10 +117,10 @@ internal fun TrendingContent(
                             SortingBottomSheetContent(
                                 currentCriteria = uiState.sorting,
                                 currentDirection = uiState.direction,
-                                onCriteriaSelect = { 
+                                onCriteriaSelect = {
                                     onEvent(TrendingEvent.ChangeSorting(it))
                                 },
-                                onDirectionSelect = { 
+                                onDirectionSelect = {
                                     onEvent(TrendingEvent.ToggleSortingDirection(it))
                                 }
                             )

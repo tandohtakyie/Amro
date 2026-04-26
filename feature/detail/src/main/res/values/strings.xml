@@ -7,4 +7,5 @@
     <string name="detail_budget_label">Budget</string>
     <string name="detail_revenue_label">Revenue</string>
     <string name="detail_back_button_cd">Back</string>
+    <string name="detail_retry_button">Retry</string>
 </resources>

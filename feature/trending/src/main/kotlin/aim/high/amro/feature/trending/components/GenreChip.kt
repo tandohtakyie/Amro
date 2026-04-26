@@ -1,5 +1,6 @@
 package aim.high.amro.feature.trending.components
 
+import aim.high.amro.core.designsystem.theme.AmroTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -44,6 +46,30 @@ internal fun GenreChip(
                 fontSize = 14.sp,
                 fontWeight = if (isActive) FontWeight.Bold else FontWeight.Medium
             )
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GenreChipActivePreview() {
+    AmroTheme {
+        GenreChip(
+            label = "Action",
+            isActive = true,
+            onClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GenreChipInactivePreview() {
+    AmroTheme {
+        GenreChip(
+            label = "Drama",
+            isActive = false,
+            onClick = {}
         )
     }
 }

@@ -1,8 +1,8 @@
 package aim.high.amro.feature.detail.components
 
-import aim.high.amro.feature.detail.state.DetailsUiState
-import aim.high.amro.feature.detail.state.DetailsEvent
 import aim.high.amro.feature.detail.R
+import aim.high.amro.feature.detail.state.DetailsEvent
+import aim.high.amro.feature.detail.state.DetailsUiState
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -94,7 +94,7 @@ internal fun DetailedViewContent(
                     )
                     Spacer(modifier = Modifier.height(24.dp))
                     Button(onClick = { onEvent(DetailsEvent.Retry) }) {
-                        Text(text = "Retry")
+                        Text(text = stringResource(R.string.detail_retry_button))
                     }
                 }
             }
@@ -172,7 +172,12 @@ internal fun DetailedViewContent(
                                             "%.1f",
                                             movie.voteAverage
                                         )
-                                    } ${stringResource(R.string.detail_vote_count_format, movie.voteCount)}",
+                                    } ${
+                                        stringResource(
+                                            R.string.detail_vote_count_format,
+                                            movie.voteCount
+                                        )
+                                    }",
                                     style = MaterialTheme.typography.labelMedium
                                 )
                             }
@@ -189,7 +194,10 @@ internal fun DetailedViewContent(
                                     style = MaterialTheme.typography.labelMedium
                                 )
                                 MetaInfoDivider()
-                                Text(text = movie.status, style = MaterialTheme.typography.labelMedium)
+                                Text(
+                                    text = movie.status,
+                                    style = MaterialTheme.typography.labelMedium
+                                )
                             }
 
                             Spacer(modifier = Modifier.height(20.dp))
@@ -225,7 +233,7 @@ internal fun DetailedViewContent(
 
                             // Overview
                             Text(
-                                text = stringResource(R.string.detail_overview_title), 
+                                text = stringResource(R.string.detail_overview_title),
                                 style = MaterialTheme.typography.headlineMedium
                             )
                             Spacer(modifier = Modifier.height(8.dp))
@@ -269,7 +277,9 @@ internal fun DetailedViewContent(
                                         Text(
                                             text = genre.name,
                                             color = MaterialTheme.colorScheme.onSecondaryContainer,
-                                            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                                            style = MaterialTheme.typography.labelMedium.copy(
+                                                fontWeight = FontWeight.Bold
+                                            )
                                         )
                                     }
                                 }

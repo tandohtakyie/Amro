@@ -1,5 +1,6 @@
 package aim.high.amro.feature.trending.components
 
+import aim.high.amro.core.designsystem.theme.AmroTheme
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -57,5 +59,16 @@ internal fun TrendingErrorView(
         Button(onClick = onRetry) {
             Text(text = stringResource(aim.high.amro.feature.trending.R.string.trending_retry_button))
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun TrendingErrorViewPreview() {
+    AmroTheme {
+        TrendingErrorView(
+            errorRes = aim.high.amro.feature.trending.R.string.trending_error_connection_message,
+            onRetry = {}
+        )
     }
 }

@@ -58,7 +58,7 @@ internal fun SortingBottomSheetContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onCriteriaSelect(criteria) }
-                    .padding(vertical = 12.dp),
+                    .padding(vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
@@ -66,7 +66,6 @@ internal fun SortingBottomSheetContent(
                     onClick = { onCriteriaSelect(criteria) }
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                // Using labelRes from core:model
                 Text(text = stringResource(criteria.labelRes))
             }
         }
@@ -91,9 +90,8 @@ internal fun SortingBottomSheetContent(
                         index = index,
                         count = SortingDirection.entries.size
                     ),
-                    label = { 
-                        // Using labelRes from core:model
-                        Text(stringResource(direction.labelRes)) 
+                    label = {
+                        Text(stringResource(direction.labelRes))
                     }
                 )
             }
